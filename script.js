@@ -2,7 +2,7 @@
   const Q = fn => {
     try {
       return fn();
-    } catch (e) { }
+    } catch (e) {}
   };
   const str = x => String(x?.description ?? x?.source ?? x?.name ?? x);
 
@@ -25,10 +25,17 @@
     const $this = new.target ? this : Object.create(XpathIterator.prototype);
     $this.next = function next() {
       const x = Q(() => xpath?.iterateNext?.());
-      return x ? { value: x, done: false } : { done: true };
+      return x ? {
+        value: x,
+        done: false
+      } : {
+        done: true
+      };
     };
 
-    $this[Symbol.iterator] = function iterator() { return $this; };
+    $this[Symbol.iterator] = function iterator() {
+      return $this;
+    };
     return $this;
   }
 
@@ -40,13 +47,19 @@
       const x = Q(() => (
         xpath.iterateNext()
       ));
-      return x ? { value: x, done: false } : { done: true };
+      return x ? {
+        value: x,
+        done: false
+      } : {
+        done: true
+      };
     };
 
-    iter[Symbol.iterator] = function iterator() { return iter; };
+    iter[Symbol.iterator] = function iterator() {
+      return iter;
+    };
     return iter;
   }
-
 
   function TreeIterator() {
     const tree = Q(() => document.createTreeWalker(...arguments));
@@ -54,10 +67,17 @@
     const $this = new.target ? this : Object.create(TreeIterator.prototype);
     $this.next = function next() {
       const x = Q(() => tree.nextNode());
-      return x ? { value: x, done: false } : { done: true };
+      return x ? {
+        value: x,
+        done: false
+      } : {
+        done: true
+      };
     };
 
-    $this[Symbol.iterator] = function iterator() { return $this; };
+    $this[Symbol.iterator] = function iterator() {
+      return $this;
+    };
     return $this;
   }
 
@@ -105,6 +125,7 @@
     $this.statusEffects = init.battleEffects ?? [];
     return $this;
   }
+
   function Species(init = {}) {
     const $class = Q(() => arguments?.callee) ?? Species;
     const $this = new.target ? this : Object.create($class.prototype);
@@ -121,7 +142,6 @@
     $this.evolutions = init.evolutions ?? [];
     return $this
   }
-
 
   const pokemon = new Pokemon();
   const opponent = new Pokemon();
@@ -159,7 +179,5 @@
   let pkh = document.createElement('div');
   pkh.setAttribute('style', "border-bottom-color:green;border-bottom-width:thick;border-bottom-style:solid;width:100%;height:100%");
   bottomRight.appendChild(pkh);
-
-
 
 })();
