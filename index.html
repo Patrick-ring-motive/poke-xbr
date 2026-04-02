@@ -10,18 +10,21 @@
 
 <body>
   <style>
-    [id="battle-stage"i] {
+    [id="battle-stage" i] {
       width: 90vmin;
       height: 90vmin;
     }
-    tr{
-      height:50%;
+
+    tr {
+      height: 50%;
     }
-    td{
+
+    td {
       width: 50%;
     }
+
   </style>
-  <imgpoo crossorigin="anonymous" src="https://poke-archive-scrape.patrickring.net/media/upload/9/98/Missingno_RB.png"/>
+  <imgpoo crossorigin="anonymous" src="https://poke-archive-scrape.patrickring.net/media/upload/9/98/Missingno_RB.png" />
   <table>
     <tr>
       <td></td>
@@ -46,33 +49,37 @@
   </table>
   <script src="script.js"></script>
   <script src="XbrWasm.js?"></script>
-  <script defer>try{
+  <script defer>
+    try {
       const imgs = document.querySelectorAll('img');
 
-       function setup(img) {
-          let xbrwasm = new XbrWasm(img, 4);
-         (xbrwasm?.destCanvas?.style??{}).height = `${img?.clientHeight}px`;
-         (xbrwasm?.destCanvas?.style??{}).width = `${img?.clientWidth}px`;
-          img?.before?.(xbrwasm.destCanvas);
-         (img?.style??{}).display = 'none';
+      function setup(img) {
+        let xbrwasm = new XbrWasm(img, 4);
+        (xbrwasm?.destCanvas?.style ?? {}).height = `${img?.clientHeight}px`;
+        (xbrwasm?.destCanvas?.style ?? {}).width = `${img?.clientWidth}px`;
+        img?.before?.(xbrwasm.destCanvas);
+        (img?.style ?? {}).display = 'none';
 
-          XbrWasm.ready.then(() => {
-            try{
-              xbrwasm.draw();
-            }catch(e){
-              alert(e);
-            }
-          });
+        XbrWasm.ready.then(() => {
+          try {
+            xbrwasm.draw();
+          } catch (e) {
+            alert(e);
+          }
+        });
       }
 
       imgs.forEach((im) => {
-         if (im.complete) {
-            setup(im);
-       } else {
-      im.onload = () => setup(im);
-         }
+        if (im.complete) {
+          setup(im);
+        } else {
+          im.onload = () => setup(im);
+        }
       });
-    }catch(e){alert(e)}
+    } catch (e) {
+      alert(e)
+    }
+
   </script>
 
 </body>
